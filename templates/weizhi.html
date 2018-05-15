@@ -1,0 +1,76 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!-- 引入 ECharts 文件 -->
+    <script src="{% static 'echarts.js'%}"></script>
+</head>
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 600px;height:400px;"></div>
+    <script >
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+       var  option = {
+    title : {
+        text: '姓氏统计',
+        subtext: '选取了数量较多的几种姓氏',
+        x:'center'
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        orient: 'vertical',
+        left: 'left',
+        data: ['王','李','张','陈','刘','徐','黄','周','赵','杨','孙','朱','吴','肖','马','陆',]
+    },
+    series : [
+        {
+            name: '访问来源',
+            type: 'pie',
+            radius : '55%',
+            center: ['50%', '60%'],
+            data:[
+                {value:43, name:'王'},
+                {value:34, name:'李'},
+                {value:29, name:'张'},
+                {value:28, name:'陈'},
+                {value:28, name:'刘'},
+                {value:16, name:'徐'},
+                {value:16, name:'黄'},
+                {value:15, name:'周'},
+                {value:13, name:'赵'},
+                {value:12, name:'杨'},
+                {value:11, name:'孙'},
+                {value:10, name:'朱'},
+                {value:9, name:'吴'},
+                {value:8, name:'肖'},
+                {value:7, name:'马'},
+                {value:6, name:'陆'},
+
+
+
+
+
+            ],
+            itemStyle: {
+                emphasis: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            }
+        }
+    ]
+};
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+</body>
+</html>
